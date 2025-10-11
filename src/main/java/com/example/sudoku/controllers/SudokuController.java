@@ -3,16 +3,25 @@ package com.example.sudoku.controllers;
 import com.example.sudoku.models.SudokuBoard;
 import com.example.sudoku.models.SudokuSolution;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class SudokuController {
 
     @FXML
+    Label victoryMessage;
+
+    @FXML
     private GridPane sudokuGridParent;
-    private final TextField[][] cells = new TextField[6][6];
-    int[][]  solution = SudokuSolution.generateSolution();
-    int[][] board = SudokuBoard.generatePuzzle(solution);
+    public static TextField[][] cells = new TextField[6][6];
+
+    SudokuSolution sudokuSolution = new SudokuSolution();
+    int[][] solution = sudokuSolution.generateSolution();
+
+
+    SudokuBoard sudokuBoard = new SudokuBoard();
+    int[][] board = sudokuBoard.generatePuzzle(solution);
 
     private TextField makeTextField(){
         TextField textfield = new TextField();
@@ -23,12 +32,16 @@ public class SudokuController {
 
     public void initialize() {
         for (int r = 0; r < 3; r++) {
+
             for (int c = 0; c < 2; c++) {
+
                 GridPane block = makeGrid();
                 sudokuGridParent.add(block, c, r);
 
                 for (int fila = 0; fila < 2; fila++) {
+
                     for (int col = 0; col < 3; col++) {
+
                         TextField textfield = makeTextField();
                         block.add(textfield, col, fila);
 
@@ -36,6 +49,34 @@ public class SudokuController {
                         int globalCol = c * 3 + col;
 
                         cells[globalRow][globalCol] = textfield;
+
+                        textfield.setOnKeyReleased(event -> {
+                            
+                            String text = textfield.getText();
+
+                            if (text.isEmpty()) {
+                                textfield.setStyle("");
+                                return;
+                            }
+
+                            if (!text.matches("[1-6]")) {
+                                textfield.setText("");
+                                return;
+                            }
+
+                            int valor = Integer.parseInt(text);
+
+                            if (SudokuValidator.isValid(globalRow, globalCol, valor)) {
+                                textfield.setStyle("");
+                            } else {
+                                textfield.setStyle("-fx-border-color: red; -fx-border-width: 2;");
+                            }
+
+                            if (SudokuValidator.gameCompleted()) {
+                                victoryMessage.setText("Congratulations! You Win!");
+                            }
+
+                        });
                     }
                 }
             }

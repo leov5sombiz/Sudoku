@@ -6,20 +6,18 @@ public class SudokuBoard {
     private static final int SIZE = 6;
     private static final int BLOCK_ROWS = 2;
     private static final int BLOCK_COLS = 3;
+    private final Random random = new Random();
 
-    public static int[][] generatePuzzle(int[][] solution) {
+    public int[][] generatePuzzle(int[][] solution) {
         int[][] puzzle = new int[SIZE][SIZE];
-        Random random = new Random();
+        for (int i = 0; i < SIZE; i++) System.arraycopy(solution[i], 0, puzzle[i], 0, SIZE);
 
-        for (int i = 0; i < SIZE; i++) {
-            System.arraycopy(solution[i], 0, puzzle[i], 0, SIZE);
-        }
-        for (int blockRow = 0; blockRow < SIZE; blockRow += BLOCK_ROWS) {
-            for (int blockCol = 0; blockCol < SIZE; blockCol += BLOCK_COLS) {
+        for (int br = 0; br < SIZE; br += BLOCK_ROWS) {
+            for (int bc = 0; bc < SIZE; bc += BLOCK_COLS) {
                 int removed = 0;
                 while (removed < 4) {
-                    int r = blockRow + random.nextInt(BLOCK_ROWS);
-                    int c = blockCol + random.nextInt(BLOCK_COLS);
+                    int r = br + random.nextInt(BLOCK_ROWS);
+                    int c = bc + random.nextInt(BLOCK_COLS);
                     if (puzzle[r][c] != 0) {
                         puzzle[r][c] = 0;
                         removed++;

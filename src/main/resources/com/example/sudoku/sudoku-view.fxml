@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="789.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sudoku.controllers.SudokuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="830.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sudoku.controllers.SudokuController">
    <bottom>
       <HBox alignment="CENTER" prefHeight="69.0" prefWidth="738.0" BorderPane.alignment="CENTER">
          <children>
@@ -59,10 +59,18 @@
                   <Font name="System Bold" size="25.0" />
                </font>
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="40.0" />
                </VBox.margin>
             </Label>
             <Label text="Press Play to Start!" />
+            <Label fx:id="victoryMessage" textFill="#257b4c">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
    </top>
