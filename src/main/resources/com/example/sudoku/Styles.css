@@ -1,3 +1,9 @@
+/**
+This file set styles for the graphical user interface
+
+It's easier than making it on the SceneBuilder
+ */
+
 .container{
     -fx-alignment: center;
     -fx-border-color: black;

@@ -7,21 +7,29 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+/**
+ * @author Leandro Moreno Castillo
+ * @version 1.0
+ */
+
 public class SudokuController {
 
-    @FXML
-    Label victoryMessage;
+    @FXML Label victoryMessage;
 
-    @FXML
-    private GridPane sudokuGridParent;
+    @FXML private GridPane sudokuGridParent;
+
     public static TextField[][] cells = new TextField[6][6];
 
     SudokuSolution sudokuSolution = new SudokuSolution();
     int[][] solution = sudokuSolution.generateSolution();
 
-
     SudokuBoard sudokuBoard = new SudokuBoard();
     int[][] board = sudokuBoard.generatePuzzle(solution);
+
+    /**
+     * Generates an empty TextField which's also uneditable
+     * @return the TextFields that the player has to fill to win the game
+     */
 
     private TextField makeTextField(){
         TextField textfield = new TextField();
@@ -30,7 +38,12 @@ public class SudokuController {
         return textfield;
     }
 
+    /**
+     * It basically controls the entire flow of the game
+     */
+
     public void initialize() {
+
         for (int r = 0; r < 3; r++) {
 
             for (int c = 0; c < 2; c++) {
@@ -83,15 +96,25 @@ public class SudokuController {
         }
     }
 
+
+    /**
+     * Makes an instance of Grid Class
+     * @return A grid instance named "block"
+     */
+
     private GridPane makeGrid(){
         GridPane block = new GridPane();
         block.getStyleClass().add("parentGridBlock");
         return block;
     }
 
+    /**
+     * It's used when the player clicks "Play"
+     * fills the board with some numbers and also makes it editable
+     */
+
     @FXML
     private void onPlayClicked() {
-
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 if (board[i][j] != 0) {
@@ -107,6 +130,11 @@ public class SudokuController {
             System.out.println();
         }
     }
+
+    /**
+     * It's used when the player clicks "Help"
+     * fills automatically an empty box with the solution
+     */
 
     @FXML
     private void onPlayHelp(){

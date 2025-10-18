@@ -2,14 +2,29 @@ package com.example.sudoku.models;
 
 import java.util.Random;
 
+/**
+ * @author Leandro Moreno Castillo
+ * @version 1.0
+ */
+
 public class SudokuBoard {
+
     private static final int SIZE = 6;
     private static final int BLOCK_ROWS = 2;
     private static final int BLOCK_COLS = 3;
+
     private final Random random = new Random();
 
+    /**
+     * Generate the puzzle that the player has to solve
+     * @param solution an instance of SudokuSolution
+     * @return An integer array called puzzle
+     */
+
     public int[][] generatePuzzle(int[][] solution) {
+
         int[][] puzzle = new int[SIZE][SIZE];
+
         for (int i = 0; i < SIZE; i++) System.arraycopy(solution[i], 0, puzzle[i], 0, SIZE);
 
         for (int br = 0; br < SIZE; br += BLOCK_ROWS) {
@@ -25,6 +40,8 @@ public class SudokuBoard {
                 }
             }
         }
+
         return puzzle;
     }
+
 }

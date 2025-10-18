@@ -9,7 +9,17 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * @author Leandro Moreno Castillo
+ * @version 1.0
+ */
+
 public class SudokuView extends Stage {
+
+    /**
+     * The information of the GUI that will be shown to the player
+     * @throws IOException if something doesn't work
+     */
 
     public SudokuView() throws IOException {
         FXMLLoader loader = new FXMLLoader(
@@ -23,9 +33,19 @@ public class SudokuView extends Stage {
         show();
     }
 
+    /**
+     * Initialize a static instance of SudokuView
+     */
+
     private static class SudokuViewHolder{
         private static SudokuView INSTANCE;
     }
+
+    /**
+     * When you call this method it will return the instance of SudokuView initialized before
+     * @return an instance of SudokuView
+     * @throws IOException if something doesn't work
+     */
 
     public static SudokuView getInstance() throws IOException {
         if (SudokuViewHolder.INSTANCE == null) {
